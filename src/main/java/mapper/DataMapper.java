@@ -10,18 +10,18 @@ import utils.IPinYouParser;
 import java.io.IOException;
 
 
-public class DataMapper extends Mapper<LongWritable, Text, CustomKey, IntWritable> {
+public class DataMapper extends Mapper<LongWritable, Text, CustomKey, Text> {
 
-    IntWritable intWritableOne = new IntWritable(1);
-    Integer intOne = new Integer(1);
+    private  final Integer intTwo = new Integer(2);
     CustomKey customKey ;
+    private final Integer ONE = new Integer(1);
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         IPinYouParser parser = new IPinYouParser(value.toString());
         if (parser.isValidForMapping()){
-            customKey=new CustomKey(parser.getCityID(),intOne);
-            context.write(customKey,intWritableOne);
+            customKey=new CustomKey(parser.getCityID(),intTwo);
+            context.write(customKey,new Text(ONE.toString()));
         }
     }
 }

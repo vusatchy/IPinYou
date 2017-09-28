@@ -10,15 +10,19 @@ import utils.IPinYouParser;
 import java.io.IOException;
 
 public class CityMapper extends Mapper<LongWritable, Text, CustomKey, Text> {
-    Integer intTwo = new Integer(2);
+
+    private IntWritable intWritableOne = new IntWritable(1);
+    private Integer ONE = new Integer(1);
+    private static  final  int TWO=2;
+
     CustomKey customKey;
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String [] cities=value.toString().split("\t");
-        if (cities.length==intTwo){
-            customKey=new CustomKey(Integer.parseInt(cities[0]),intTwo);
-            context.write(customKey,intWritableOne);
+        if (cities.length==TWO){
+            customKey=new CustomKey(Integer.parseInt(cities[0]),ONE);
+            context.write(customKey,new Text(cities[1]));
         }
     }
-    
+
 }
