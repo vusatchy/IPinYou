@@ -1,5 +1,7 @@
 package utils;
 
+import eu.bitwalker.useragentutils.UserAgent;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class IPinYouParser {
 
     private final int CITY_ID_INDEX = 7;
     private final int MAX_CITY_INDEX =395;
+
+    private final int AGENT_INDEX=4;
 
     private final int MIN_BIDDING_PRICE=250;
     private final int BIDDING_PRICE_INDEX =19;
@@ -22,6 +26,8 @@ public class IPinYouParser {
     }
 
 
+
+    public String getOS() {return  UserAgent.parseUserAgentString(words.get(AGENT_INDEX)).getOperatingSystem().getGroup().toString();}
 
     public int getCityID(){
         return Integer.parseInt(words.get(CITY_ID_INDEX));

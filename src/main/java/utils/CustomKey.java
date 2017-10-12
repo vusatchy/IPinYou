@@ -8,9 +8,12 @@ import java.io.IOException;
 
 
 public class CustomKey implements WritableComparable<CustomKey> {
-    private Integer userId;
+    private Integer cityId;
     private Integer dataSetType;
 
+
+    public Integer getCityId() {
+        return cityId; }
 
     public CustomKey() {
 
@@ -18,12 +21,8 @@ public class CustomKey implements WritableComparable<CustomKey> {
 
     public CustomKey(Integer userId, Integer dataSetType) {
         super();
-        this.userId = userId;
+        this.cityId = userId;
         this.dataSetType = dataSetType;
-    }
-
-    public Integer getUserId() {
-        return userId;
     }
 
     public Integer getDataSetType() {
@@ -32,13 +31,13 @@ public class CustomKey implements WritableComparable<CustomKey> {
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(userId);
+        out.writeInt(cityId);
         out.writeInt(dataSetType);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        userId = in.readInt();
+        cityId = in.readInt();
         dataSetType = in.readInt();
     }
 
@@ -47,7 +46,7 @@ public class CustomKey implements WritableComparable<CustomKey> {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((dataSetType == null) ? 0 : dataSetType.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((cityId == null) ? 0 : cityId.hashCode());
         return result;
     }
 
@@ -65,17 +64,17 @@ public class CustomKey implements WritableComparable<CustomKey> {
                 return false;
         } else if (!dataSetType.equals(other.dataSetType))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (cityId == null) {
+            if (other.cityId != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!cityId.equals(other.cityId))
             return false;
         return true;
     }
 
     @Override
     public int compareTo(CustomKey o) {
-        int returnValue = compare(userId, o.getUserId());
+        int returnValue = compare(cityId, o.getCityId());
         if (returnValue != 0) {
             return returnValue;
         }
@@ -88,7 +87,6 @@ public class CustomKey implements WritableComparable<CustomKey> {
 
     @Override
     public String toString() {
-        return "util.CustomKey [userId=" + userId + ", dataSetType=" + dataSetType + "]";
+        return "util.CustomKey [userId=" + cityId + ", dataSetType=" + dataSetType + "]";
     }
 }
-

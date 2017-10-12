@@ -8,6 +8,9 @@ import utils.CustomKey;
 import utils.IPinYouParser;
 
 import java.io.IOException;
+import java.util.Arrays;
+
+
 
 
 public class DataMapper extends Mapper<LongWritable, Text, CustomKey, Text> {
@@ -19,9 +22,7 @@ public class DataMapper extends Mapper<LongWritable, Text, CustomKey, Text> {
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         IPinYouParser parser = new IPinYouParser(value.toString());
-        if (parser.isValidForMapping()){
-            customKey=new CustomKey(parser.getCityID(),intTwo);
-            context.write(customKey,new Text(ONE.toString()));
-        }
+        customKey=new CustomKey(parser.getCityID(),intTwo);
+        context.write(customKey,new Text(ONE.toString()));
     }
 }
